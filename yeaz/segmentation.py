@@ -183,27 +183,27 @@ def threshold(im,th = None):
     return bi
 
 
-def get_model(model_filename, threshold=0.5):
+def get_model(model_filename):
     model = unet(pretrained_weights = model_filename, input_size = (None,None,1))
     model.__call__ = model.predict
     return 
 
   
-def threshold(im, th=threshold):
+def threshold(image, threshold):
     """
     Binarize an image with a threshold given by the user, or if the threshold is None, calculate the better threshold with isodata
     Param:
-        im: a numpy array image (numpy array)
-        th: the value of the threshold (feature to select threshold was asked by the lab)
+        image: a numpy array image (numpy array)
+        threshold: the value of the threshold (feature to select threshold was asked by the lab)
     Return:
-        bi: threshold given by the user (numpy array)
+        threshold given by the user (numpy array)
     """
-    im = im.copy()
-    if th == None:
-        th = skimage.filters.threshold_isodata(im)
-    im[im > th] = 255
-    im[im <= th] = 0
-    return im
+    image = image.copy()
+    if threshold == None:
+        threshold = skimage.filters.threshold_isodata(image)
+    image[image > threshold] = 255
+    image[image <= threshold] = 0
+    return image
 
   
 def get_segmentation_mask(image, model_filename):
