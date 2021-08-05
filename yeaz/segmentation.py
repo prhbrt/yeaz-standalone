@@ -198,7 +198,7 @@ def get_segmentation_mask(image, model_filename):
     image = np.pad(image, ((0,0), (0, row_add), (0, col_add)))
     if len(image.shape) < 4:
       image = image[..., None]
-    return predictor.predict(image)[:height, :width]
+    return predictor.predict(image)[:, :height, :width, 0]
 
 
 def threshold_segmentation_mask(image, threshold=None):
@@ -209,7 +209,7 @@ def threshold_segmentation_mask(image, threshold=None):
 
 
 def segment_instances(probability_maps, thresholded_maps, min_distance):
-  segmentation = np.zeros(predictions.shape, np.float64)
+  segmentation = np.zeros(probability_maps.shape, np.float64)
   for probability_map, thresholded_map, segmentation_frame in zip(
      probability_maps, thresholded_maps, segmentation):
       segmentation_frame[:] = segment(
