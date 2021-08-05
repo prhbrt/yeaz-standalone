@@ -186,7 +186,7 @@ def threshold(im,th = None):
 def get_model(model_filename):
     model = unet(pretrained_weights = model_filename, input_size = (None,None,1))
     model.__call__ = model.predict
-    return 
+    return model
 
   
 def threshold(image, threshold):
