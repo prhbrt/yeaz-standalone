@@ -210,7 +210,7 @@ def get_segmentation_mask(image, model_filename):
     predictor = model_filename
     if isinstance(predictor, str):
         predictor = get_model(model_filename, threshold=threshold)
-    height, width = image.shape
+    height, width = image.shape[1:][:2]
     row_add = -height % 16
     col_add = -width % 16
     image = np.pad(image, ((0,0), (0, row_add), (0, col_add)))
