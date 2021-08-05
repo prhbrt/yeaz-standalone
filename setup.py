@@ -20,7 +20,7 @@ setup(
       ],
       keywords='yeast cell detection, microscopy images, tif, tiff, image segmentation, tracking, computer vision',
       
-      packages=['yeastcells'],
+      packages=['yeaz'],
       install_requires=[
         'h5py==2.9.0',
         'tensorflow>=1.15.2,<2',
