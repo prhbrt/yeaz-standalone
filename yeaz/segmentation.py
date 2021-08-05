@@ -214,11 +214,13 @@ def get_segmentation_mask(image, model_filename):
     row_add = -height % 16
     col_add = -width % 16
     image = np.pad(image, ((0,0), (0, row_add), (0, col_add)))
-    return predictor(image)[:height, :width]
+    if len(image.shape) < 4:
+      image = image[..., None]
+    return predictor.predict(image)[:height, :width]
 
 
 def threshold_segmentation_mask(image, threshold=None):
-    thresholded_mask = np.zeros(predictor.shape, np.uint8)
+    thresholded_mask = np.zeros(image.shape, np.uint8)
     for mask, frame in zip(thresholded_mask, predictor):
       mask[:] = threshold(frame, threshold)
     return thresholded_mask
