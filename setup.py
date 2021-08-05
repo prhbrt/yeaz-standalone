@@ -3,11 +3,11 @@ from setuptools import setup
 
 
 setup(
-      name='yeastcelldetection',
-      version=__import__('yeastcelldetection').__version__,
+      name='yeaz',
+      version=__import__('yeaz').__version__,
 
-      description='Evaluation funcitons for yeast cell detection and tracking pipelines.',
-      long_description='Evaluation funcitons for yeast cell detection and tracking pipelines.',
+      description='YeaZ without a GUI.',
+      long_description='YeaZ without a GUI.',
       
       url='https://github.com/prhbrt/yeastcells-detection/',
 
