@@ -165,31 +165,13 @@ def get_bounding_box(im):
                      np.min(coords[1]), np.max(coords[1])])
 
 
-def threshold(im,th = None):
-    """
-    Binarize an image with a threshold given by the user, or if the threshold is None, calculate the better threshold with isodata
-    Param:
-        im: a numpy array image (numpy array)
-        th: the value of the threshold (feature to select threshold was asked by the lab)
-    Return:
-        bi: threshold given by the user (numpy array)
-    """
-    im2 = im.copy()
-    if th == None:
-        th = skimage.filters.threshold_isodata(im2)
-    bi = im2
-    bi[bi > th] = 255
-    bi[bi <= th] = 0
-    return bi
-
-
 def get_model(model_filename):
     model = unet(pretrained_weights = model_filename, input_size = (None,None,1))
     model.__call__ = model.predict
     return model
 
   
-def threshold(image, threshold):
+def threshold_mask(image, threshold):
     """
     Binarize an image with a threshold given by the user, or if the threshold is None, calculate the better threshold with isodata
     Param:
@@ -221,8 +203,8 @@ def get_segmentation_mask(image, model_filename):
 
 def threshold_segmentation_mask(image, threshold=None):
     thresholded_mask = np.zeros(image.shape, np.uint8)
-    for mask, frame in zip(thresholded_mask, predictor):
-      mask[:] = threshold(frame, threshold)
+    for mask, frame in zip(thresholded_mask, image):
+      mask[:] = threshold_mask(frame, threshold)
     return thresholded_mask
 
 
