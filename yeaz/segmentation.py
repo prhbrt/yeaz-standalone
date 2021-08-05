@@ -248,6 +248,6 @@ def segment_instances(probability_maps, thresholded_maps, min_distance):
   y, x = zip(*(
     map(np.mean, np.where(mask))
     for mask in masks
-  )
+  ))
   assert len(frames) == len(masks), "If this assertion fails, that is awkward"
   return pd.DataFrame({'frame': frames, 'mask': np.arange(len(masks)), 'x': x, 'y': y}), masks
