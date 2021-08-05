@@ -14,6 +14,7 @@ from skimage.morphology import dilation
 from skimage.filters import gaussian
 from skimage.measure import label
 import numpy as np
+import pandas as pd
 
 
 def peak_local_max_as_mask(image, markers, indices):
@@ -181,15 +182,6 @@ def threshold(im,th = None):
     bi[bi <= th] = 0
     return bi
 
-  
-# -*- coding: utf-8 -*-
-from detectron2.utils.logger import setup_logger
-setup_logger()
-from detectron2 import model_zoo
-from detectron2.engine import DefaultPredictor
-from detectron2.config import get_cfg
-import pandas as pd
-import numpy as np
 
 def get_model(model_filename, threshold=0.5):
     model = unet(pretrained_weights = model_filename, input_size = (None,None,1))
