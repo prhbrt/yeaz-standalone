@@ -188,7 +188,7 @@ def threshold_mask(image, threshold):
     return image
 
   
-def get_segmentation_mask(image, model_filename):
+def get_segmentation_mask(image, model_filename, batch_size=None):
     predictor = model_filename
     if isinstance(predictor, str):
         predictor = get_model(model_filename, threshold=threshold)
@@ -198,7 +198,8 @@ def get_segmentation_mask(image, model_filename):
     image = np.pad(image, ((0,0), (0, row_add), (0, col_add)))
     if len(image.shape) < 4:
       image = image[..., None]
-    return predictor.predict(image)[:, :height, :width, 0]
+    kwargs = {'batch_size': batch_size} if batch_size is not None else {}
+    return predictor.predict(image, **kwargs)[:, :height, :width, 0]
 
 
 def threshold_segmentation_mask(image, threshold=None):
