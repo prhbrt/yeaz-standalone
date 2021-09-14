@@ -23,7 +23,6 @@ setup(
       packages=['yeaz'],
       install_requires=[
         'h5py==2.9.0',
-        'tensorflow>=1.15.2,<3',
         'scikit-image>=0.17.2',
         'scikit-learn>=0.23.2,<0.24', # some threadpoolctl issues at 0.24
         'opencv-python>=4.4.0.46',
